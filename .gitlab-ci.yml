@@ -35,6 +35,8 @@ test:
 
 build:
   stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
   script:
     - python -m build
     - pip install dist/*.whl

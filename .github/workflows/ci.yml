@@ -52,6 +52,7 @@ jobs:
     name: Сборка пакета
     runs-on: ubuntu-latest
     needs: test
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
