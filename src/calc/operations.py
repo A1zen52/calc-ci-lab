@@ -34,3 +34,13 @@ def power(base: float, exponent: int) -> float:
     for _ in range(abs(exponent)):
         result *= base
     return result if exponent >= 0 else 1 / result
+
+
+VOWELS = frozenset("aeiouаеёиоуыэюя")
+
+
+def count_vowels(s: str) -> int:
+    """Возвращает число гласных (латинских и русских) в строке s."""
+    if not isinstance(s, str):
+        raise TypeError("Аргумент должен быть строкой")
+    return sum(1 for ch in s.lower() if ch in VOWELS)

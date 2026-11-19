@@ -2,7 +2,7 @@
 
 import pytest
 
-from calc import add, divide, multiply, power, subtract
+from calc import add, count_vowels, divide, multiply, power, subtract
 from calc.cli import main
 
 
@@ -52,3 +52,17 @@ def test_cli_add(capsys):
 def test_cli_division_by_zero_returns_error_code(capsys):
     assert main(["div", "1", "0"]) == 1
     assert "Ошибка" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [("hello", 2), ("Привет, мир!", 3), ("", 0), ("rhythm", 0), ("AEIOU", 5)],
+)
+def test_count_vowels(text, expected):
+    assert count_vowels(text) == expected
+
+
+@pytest.mark.parametrize("bad", [123, None, ["a"]])
+def test_count_vowels_rejects_non_string(bad):
+    with pytest.raises(TypeError):
+        count_vowels(bad)
